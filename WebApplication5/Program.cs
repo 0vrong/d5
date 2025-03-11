@@ -10,7 +10,7 @@ app.UseSwaggerUI();
 List<Pills> repo = [];
 
 app.MapGet("/", () => repo);
-app.MapPost("/", (CreateTablesDTO dto) =>
+app.MapPost("/", (CreatePillsDTO dto) =>
 {
     var pills = new Pills
     {
@@ -23,7 +23,7 @@ app.MapPost("/", (CreateTablesDTO dto) =>
     };
     repo.Add(pills);
 });
-app.MapPut("/", ([FromQuery]Guid id,UpdateTablesDTO dto) =>
+app.MapPut("/", ([FromQuery]Guid id,UpdatePillsDTO dto) =>
 {
     Pills buffer = repo.Find(x => x.id == id);
     buffer.name = dto.name;
@@ -48,5 +48,5 @@ class Pills
 
 }
 
-record class CreateTablesDTO(string name, int mg, double price);
-record class UpdateTablesDTO (string name, int mg, double price);
+record class CreatePillsDTO(string name, int mg, double price);
+record class UpdatePillsDTO (string name, int mg, double price);
