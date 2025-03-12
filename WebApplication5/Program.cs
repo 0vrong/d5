@@ -9,8 +9,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 List<Pills> repo = [];
 
-app.MapGet("/", () => repo);
-app.MapPost("/", (CreatePillsDTO dto) =>
+app.MapGet("/pills", () => repo);
+app.MapPost("/pills/add", (CreatePillsDTO dto) =>
 {
     var pills = new Pills
     {
@@ -23,14 +23,14 @@ app.MapPost("/", (CreatePillsDTO dto) =>
     };
     repo.Add(pills);
 });
-app.MapPut("/", ([FromQuery]Guid id,UpdatePillsDTO dto) =>
+app.MapPut("/pills/update", ([FromQuery]Guid id,UpdatePillsDTO dto) =>
 {
     Pills buffer = repo.Find(x => x.id == id);
     buffer.name = dto.name;
     buffer.mg = dto.mg;
     buffer.price = dto.price;
 });
-app.MapDelete("/", ([FromQuery] Guid id) =>
+app.MapDelete("/pills/delete", ([FromQuery] Guid id) =>
 {
     Pills buffer = repo.Find(x => x.id == id);
     repo.Remove(buffer);
