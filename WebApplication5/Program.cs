@@ -12,7 +12,7 @@ List<Pills> repo = [];
 app.MapGet("/pills", () => repo);
 app.MapPost("/pills/add", (CreatePillsDTO dto) =>
 {
-    var pills = new Pills
+    Pills pills = new Pills
     {
         id = Guid.NewGuid(),
         name = dto.name,
